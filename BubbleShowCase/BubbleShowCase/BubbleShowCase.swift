@@ -1025,8 +1025,7 @@ public class BubbleShowCase: UIView {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(50)) { [weak self] in
             guard let self = self else { return }
-            guard let target = self.target,
-                  let parent = target.superview ?? target,
+            guard let parent = self.target.superview ?? target,
                   let window = target.window,
                   window.isKeyWindow else {
                 return
@@ -1037,11 +1036,14 @@ public class BubbleShowCase: UIView {
                 return
             }
         
-            let screenshot = parent.resizableSnapshotView(
+            guard let screenshot = parent.resizableSnapshotView(
                 from: targetFrame,
                 afterScreenUpdates: false,
                 withCapInsets: .zero
-            )
+            ) else {
+                return
+            }
+            
             screenshot.backgroundColor = self.sreenshotContainerBackground
             screenshot.translatesAutoresizingMaskIntoConstraints = false
             screenshot.isUserInteractionEnabled = false
