@@ -8,10 +8,10 @@ Pod::Spec.new do |s|
     It is really simple to use, comes with animations and helps your users understand your App design.
   DESC
 
-  s.homepage     = "https://github.com/Scianski/BubbleShowCase-iOS"
+  s.homepage     = "https://www.elconfidencial.com"
   s.license      = { :type => "MIT", :file => "LICENSE" }
-  s.author       = { "Scianski" => "your@email.com" }
-  s.social_media_url = "https://github.com/Scianski"
+  s.author             = { "ElConfidencial" => "apps@elconfidencial.com", "fermoya" => "fmdr.ct@gmail.com" }
+  s.social_media_url   = "https://twitter.com/elconfidencial"
 
   s.platform     = :ios
   s.ios.deployment_target = '9.0'
@@ -21,5 +21,5 @@ Pod::Spec.new do |s|
   s.source_files = "BubbleShowCase/BubbleShowCase/*.swift"
 
   s.xcconfig = { "SWIFT_VERSION" => "5.1" }
-  s.documentation_url = "https://github.com/Scianski/BubbleShowCase-iOS/blob/master/README.md"
+  s.documentation_url = "https://github.com/ECLaboratorio/BubbleShowCase-iOS/blob/master/README.md"
 end
