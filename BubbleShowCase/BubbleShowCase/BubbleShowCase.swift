@@ -1023,11 +1023,25 @@ public class BubbleShowCase: UIView {
         screenshotHeight.constant = screenShotFrame.height
         screenshotWidth.constant = screenShotFrame.width
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(50)) { [weak self] in        // Takes the screenshot asynchronously while animating appearance
-            guard let `self` = self else { return }
-            
-            let parent: UIView! = self.target.superview ?? self.target
-            let screenshot: UIView! = parent.resizableSnapshotView(from: self.target.frame, afterScreenUpdates: false, withCapInsets: UIEdgeInsets.zero)
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(50)) { [weak self] in
+            guard let self = self else { return }
+            guard let target = self.target,
+                  let parent = target.superview ?? target,
+                  let window = target.window,
+                  window.isKeyWindow else {
+                return
+            }
+        
+            let targetFrame = target.frame
+            guard targetFrame.width > 0, targetFrame.height > 0 else {
+                return
+            }
+        
+            let screenshot = parent.resizableSnapshotView(
+                from: targetFrame,
+                afterScreenUpdates: false,
+                withCapInsets: .zero
+            )
             screenshot.backgroundColor = self.sreenshotContainerBackground
             screenshot.translatesAutoresizingMaskIntoConstraints = false
             screenshot.isUserInteractionEnabled = false
